@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leave Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="header">
+        <img src="https://www.bluebrainstrategy.com/img/logo_1.png" alt="Leave Tracker Logo">
+    </div>
+
+    <!-- Tab buttons -->
+    <div class="tab">
+        <button class="tablinks active" onclick="openTab(event, 'leaveForm')">Leave Form</button>
+        <button class="tablinks" onclick="openTab(event, 'leaveHistory')">Leave History</button>
+    </div>
+
+    <!-- Leave Form -->
+    <div id="leaveForm" class="tabcontent">
+        <div>
+            <h1 style="color:rgb(14, 149, 205); text-align: center;">Leave Tracker</h1>
+        </div>
+        <form id="leaveFormContent" action="/submit" method="post">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Employee Name</th>
+                        <th>Leave Type</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Duration</th>
+                        <th>Approval Status</th>
+                        <th>Comments/Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input required type="text" id="employeeName" name="employeeName"></td>
+                        <td>
+                            <select name="leaveType" id="leaveType">
+                                <option value="Casual">Casual</option>
+                                <option value="Sick">Sick</option>
+                                <option value="Personal">Personal</option>
+                            </select>
+                        </td>
+                        <td><input required type="date" id="startDate" name="startDate" onchange="calculateDuration()">
+                        </td>
+                        <td><input required type="date" id="endDate" name="endDate" onchange="calculateDuration()"></td>
+                        <td><input required type="text" id="leaveDuration" name="leaveDuration" readonly></td>
+                        <td>
+                            <select name="approvalStatus" disabled>
+                                <option value="Pending" selected>Pending</option>
+                                <option value="Approved">Approved</option>
+                                <option value="Cancelled">Cancelled</option>
+                            </select>
+                        </td>
+                        <td><input type="text" name="comments"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="7" class="submit-button-container">
+                            <button type="submit">Submit</button>
+                            <button class="clear-button" type="button" onclick="clearForm()">Clear</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <!-- Leave History -->
+    <div id="leaveHistory" class="tabcontent" style="display:none;">
+        <h2 id="leaveHistoryHeading" style="margin-top: 10px;">Leave History</h2>
+        <div class="filter-submit-container">
+            <div>
+                <label for="leaveTypeFilter">Filter by Leave Type:</label>
+                <select id="leaveTypeFilter">
+                    <option value="">All</option>
+                    <option value="Casual">Casual</option>
+                    <option value="Sick">Sick</option>
+                    <option value="Personal">Personal</option>
+                </select>
+            </div>
+            <button id="submitLeaveHistory" type="button">Submit</button>
+        </div>
+        <table>
+            <!-- Table headers -->
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Duration</th>
+                    <th>Approval Status</th>
+                    <th>Comments/Notes</th>
+                </tr>
+            </thead>
+            <!-- Table body for leave history rows -->
+            <tbody id="leaveHistoryTableBody">
+                <!-- Leave history rows will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

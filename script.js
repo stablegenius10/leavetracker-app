@@ -53,7 +53,7 @@ function displayLeaveHistory(leaveHistory) {
 async function updateApprovalStatus(id, approvalStatus) {
   try {
     const response = await fetch(
-      `http://localhost:5555/update-approval-status/${id}`,
+      `https://leavetrackerserver.onrender.com/api/update-approval-status/${id}`,
       {
         method: "PUT",
         headers: {
@@ -138,7 +138,7 @@ document.addEventListener("DOMContentLoaded", async function () {
 
     try {
       // Send form data to server
-      const response = await fetch("http://localhost:5555/submit", {
+      const response = await fetch("https://leavetrackerserver.onrender.com/api/submit", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -207,7 +207,7 @@ function calculateDuration() {
 // Function to fetch leave history data from the database
 async function fetchLeaveHistory() {
   try {
-    const response = await fetch("http://localhost:5555/leave-history");
+    const response = await fetch("https://leavetrackerserver.onrender.com/api/leave-history");
     const leaveHistory = await response.json();
     displayLeaveHistory(leaveHistory.reverse()); // Reverse the order of entries
   } catch (error) {

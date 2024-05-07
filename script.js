@@ -89,7 +89,9 @@ async function submitApprovalStatusChanges() {
 
     // Wait for all status update requests to complete
     await Promise.all(updateRequests);
-
+    
+    //Alert for update in hidtory
+    alert("Leave Status updated!")
     // Once all requests are completed, fetch updated leave history
     fetchLeaveHistory();
   } catch (error) {
@@ -197,7 +199,7 @@ function calculateDuration() {
   ) {
     var timeDifference = endDate.getTime() - startDate.getTime();
     var daysDifference = Math.ceil(timeDifference / (1000 * 60 * 60 * 24));
-    document.getElementById("leaveDuration").value = daysDifference + " days";
+    document.getElementById("leaveDuration").value = (daysDifference+1) + " days";
   } else {
     // If either start date or end date is invalid or end date is before start date, set leave duration to empty
     document.getElementById("leaveDuration").value = "";

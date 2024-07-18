@@ -129,6 +129,47 @@ function clearForm() {
   calculateDuration();
 }
 
+const leaveForm = document.getElementById("leaveForm");
+  leaveForm.addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    // Get form data
+    let formData = {};
+    let formInputs = document.querySelectorAll(
+      "#leaveForm input, #leaveForm select"
+    );
+    formInputs.forEach(function (input) {
+      formData[input.name] = input.value;
+    });
+
+    try {
+      // Send form data to server
+      const response = await fetch(
+        "https://leavetrackerserver.onrender.com/api/submit",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
+
+      if (response.ok) {
+        // Reload page after successful submission
+        location.reload();
+        alert("Form submitted successfully");
+      } else {
+        // Handle error response from server
+        alert("Failed to submit form. Please try again.");
+      }
+    } catch (error) {
+      // Handle network errors
+      console.error("Error:", error);
+      alert("An error occurred while submitting the form");
+    }
+  });
+
 // Function to calculate leave duration
 function calculateDuration() {
   const startDate = new Date(document.getElementById("startDate").value);

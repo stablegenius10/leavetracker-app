@@ -147,17 +147,25 @@
             fetch(`/api/leaveHistory?employeeName=${encodeURIComponent(employeeNameFilter)}`)
                 .then(response => response.json())
                 .then(data => {
+                    console.log("line1")
                     const leaveHistoryTableBody = document.getElementById('leaveHistoryTableBody');
+                    console.log("line2")
                     leaveHistoryTableBody.innerHTML = ''; // Clear existing rows
+                    
+                    console.log("line3")
 
                     data.forEach(entry => {
+                        
+                        console.log("line4")
                         const statusText = {
                             'Pending': 'Pending',
                             'Approved': 'Approved',
                             'Cancelled': 'Cancelled' // Ensure all statuses are correctly mapped
                         }[entry.approvalStatus] || 'Unknown';
+                        console.log("line5")
 
                         const row = document.createElement('tr');
+                        console.log("line6")
                         row.innerHTML = `
                             <td>${entry.employeeName}</td>
                             <td>${entry.leaveType}</td>

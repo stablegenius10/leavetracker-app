@@ -28,11 +28,11 @@
             <table>
                 <tbody>
                     <tr>
-                        <td data-label="Employee Name">
+                        <td >
                             <label for="employeeName">Employee Name:</label>
                             <input required type="text" id="employeeName" name="employeeName">
                         </td>
-                        <td data-label="Leave Type">
+                        <td>
                             <label for="leaveType">Leave Type:</label>
                             <select name="leaveType" id="leaveType">
                                 <option value="Casual">Casual</option>
@@ -40,21 +40,21 @@
                                 <option value="Personal">Personal</option>
                             </select>
                         </td>
-                        <td data-label="Start Date">
+                        <td>
                             <label for="startDate">Start Date:</label>
                             <input required type="date" id="startDate" name="startDate" onchange="calculateDuration()">
                         </td>
                     </tr>
                     <tr>
-                        <td data-label="End Date">
+                        <td>
                             <label for="endDate">End Date:</label>
                             <input required type="date" id="endDate" name="endDate" onchange="calculateDuration()">
                         </td>
-                        <td data-label="Duration">
-                            <label for="leaveDuration">Duration (days):</label>
+                        <td>
+                            <label for="leaveDuration">Duration:</label>
                             <input required type="text" id="leaveDuration" name="leaveDuration" readonly>
                         </td>
-                        <td data-label="Approval Status">
+                        <td>
                             <label for="approvalStatus">Approval Status:</label>
                             <select name="approvalStatus" id="approvalStatus" disabled>
                                 <option value="Pending" selected>Pending</option>
@@ -64,7 +64,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="3" data-label="Comments/Notes">
+                        <td colspan="3">
                             <label for="comments">Comments/Notes:</label>
                             <textarea id="comments" name="comments"></textarea>
                         </td>
@@ -83,7 +83,7 @@
         <h2 id="leaveHistoryHeading">Leave History</h2>
         <div class="filter-submit-container">
             <div>
-                <label for="employeeNameFilter">Filter by Employee Name:</label>
+                <label for="employeeNameFilter">Employee Name</label>
                 <select id="employeeNameFilter">
                     <option value="">All</option>
                     <!-- Options will be dynamically added via JavaScript -->
@@ -100,7 +100,7 @@
                     <th>Duration</th>
                     <th>Approval Status</th>
                     <th>Comments/Notes</th>
-                    <th>Actions</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody id="leaveHistoryTableBody">

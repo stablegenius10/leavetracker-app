@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,102 +10,109 @@
 <body>
     <div class="header">
         <img src="logo.png" alt="Leave Tracker Logo">
+        <h1>Leave Tracker</h1>
     </div>
 
     <!-- Tab buttons -->
-    <div class="tab">
-        <button class="tablinks active" onclick="openTab(event, 'leaveForm')">Leave Form</button>
-        <button class="tablinks" onclick="openTab(event, 'leaveHistory')">Leave History</button>
+    <div class="tab-container">
+        <div class="tab">
+            <button class="tablinks active" onclick="openTab(event, 'leaveForm')">Leave Form</button>
+            <button class="tablinks" onclick="openTab(event, 'leaveHistory')">Leave History</button>
+        </div>
     </div>
 
     <!-- Leave Form -->
     <div id="leaveForm" class="tabcontent">
-        <div>
-            <h1 style="color:rgb(14, 149, 205); text-align: center;">Leave Tracker</h1>
-        </div>
+        <h2 style="color:rgb(14, 149, 205); text-align: center;">Submit Leave Request</h2>
         <form id="leaveFormContent" action="/submit" method="post">
             <table>
-                <thead>
-                    <tr>
-                        <th>Employee Name</th>
-                        <th>Leave Type</th>
-                        <th>Start Date</th>
-                        <th>End Date</th>
-                        <th>Duration</th>
-                        <th>Approval Status</th>
-                        <th>Comments/Notes</th>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr>
-                        <td>
+                        <td data-label="Employee Name">
+                            <label for="employeeName">Employee Name:</label>
                             <input required type="text" id="employeeName" name="employeeName">
                         </td>
-                        <td>
+                        <td data-label="Leave Type">
+                            <label for="leaveType">Leave Type:</label>
                             <select name="leaveType" id="leaveType">
                                 <option value="Casual">Casual</option>
                                 <option value="Sick">Sick</option>
                                 <option value="Personal">Personal</option>
                             </select>
                         </td>
-                        <td><input required type="date" id="startDate" name="startDate" onchange="calculateDuration()">
+                        <td data-label="Start Date">
+                            <label for="startDate">Start Date:</label>
+                            <input required type="date" id="startDate" name="startDate" onchange="calculateDuration()">
                         </td>
-                        <td><input required type="date" id="endDate" name="endDate" onchange="calculateDuration()"></td>
-                        <td><input required type="text" id="leaveDuration" name="leaveDuration" readonly></td>
-                        <td>
-                            <select name="approvalStatus" disabled>
+                    </tr>
+                    <tr>
+                        <td data-label="End Date">
+                            <label for="endDate">End Date:</label>
+                            <input required type="date" id="endDate" name="endDate" onchange="calculateDuration()">
+                        </td>
+                        <td data-label="Duration">
+                            <label for="leaveDuration">Duration (days):</label>
+                            <input required type="text" id="leaveDuration" name="leaveDuration" readonly>
+                        </td>
+                        <td data-label="Approval Status">
+                            <label for="approvalStatus">Approval Status:</label>
+                            <select name="approvalStatus" id="approvalStatus" disabled>
                                 <option value="Pending" selected>Pending</option>
                                 <option value="Approved">Approved</option>
                                 <option value="Cancelled">Cancelled</option>
                             </select>
                         </td>
-                        <td><input type="text" name="comments"></td>
                     </tr>
                     <tr>
-                        <td colspan="7" class="submit-button-container">
-                            <button type="submit">Submit</button>
-                            <button class="clear-button" type="button" onclick="clearForm()">Clear</button>
+                        <td colspan="3" data-label="Comments/Notes">
+                            <label for="comments">Comments/Notes:</label>
+                            <textarea id="comments" name="comments"></textarea>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <div class="submit-button-container">
+                <button type="submit">Submit</button>
+                <button type="button" class="clear-button" onclick="clearForm()">Clear</button>
+            </div>
         </form>
     </div>
-   <!-- Leave History -->
-<div id="leaveHistory" class="tabcontent" style="display:none;">
-    <h2 id="leaveHistoryHeading" style="margin-top: 10px;">Leave History</h2>
-    <div class="filter-submit-container">
-        <div>
-            <!-- <label for="employeeNameFilter"></label> -->
-            <select id="employeeNameFilter">
-                <option value="">All</option>
-                <!-- Options will be dynamically added via JavaScript -->
-            </select>
+
+    <!-- Leave History -->
+    <div id="leaveHistory" class="tabcontent" style="display:none;">
+        <h2 id="leaveHistoryHeading">Leave History</h2>
+        <div class="filter-submit-container">
+            <div>
+                <label for="employeeNameFilter">Filter by Employee Name:</label>
+                <select id="employeeNameFilter">
+                    <option value="">All</option>
+                    <!-- Options will be dynamically added via JavaScript -->
+                </select>
+            </div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Employee Name</th>
+                    <th>Leave Type</th>
+                    <th>Start Date</th>
+                    <th>End Date</th>
+                    <th>Duration</th>
+                    <th>Approval Status</th>
+                    <th>Comments/Notes</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="leaveHistoryTableBody">
+                <!-- Leave history rows will be dynamically added here -->
+            </tbody>
+        </table>
+        <div class="submit-button-container">
+            <button id="submitLeaveHistory" type="button" onclick="fetchLeaveHistory()">Submit</button>
         </div>
     </div>
-    <table>
-        <!-- Table headers -->
-        <thead>
-            <tr>
-                <th>Employee Name</th>
-                <th>Leave Type</th>
-                <th>Start Date</th>
-                <th>End Date</th>
-                <th>Duration</th>
-                <th>Approval Status</th>
-                <th>Comments/Notes</th>
-                <th></th>
-            </tr>
-        </thead>
-        <!-- Table body for leave history rows -->
-        <tbody id="leaveHistoryTableBody">
-            <!-- Leave history rows will be dynamically added here -->
-        </tbody>
-    </table>
-    <button id="submitLeaveHistory" type="button">Submit</button>
-</div>
-
-<script src="script.js"></script>
-</body>
+    <script src="script.js"></script>
+      
+    </body>
 
 </html>

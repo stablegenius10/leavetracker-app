@@ -1,20 +1,32 @@
+/* General Styles */
+
 .header {
     background-color: white;
     padding: 20px;
     text-align: center;
 }
 
+h1 {
+    color: rgb(66, 186, 237);
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.178); /* Adjust the shadow as needed */
+}
+
 .header img {
-    width: 250px;
+    width: 100%;
+    max-width: 250px;
     height: auto;
     margin-right: 10px;
     vertical-align: middle;
 }
+body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
 
 .tab-container {
     display: flex;
-    justify-content: space-between;
-    margin-bottom: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 40px; /* Increased spacing */
 }
 
 .tab {
@@ -36,19 +48,25 @@
     background-color: rgb(66, 186, 237);
 }
 
+.tab button.active {
+    background-color: rgb(100, 194, 234);
+}
+
 #leaveForm {
-    width: 80%;
+    width: 100%;
+    max-width: 800px;
     margin: 20px auto;
-    background-color: #fff;
-    padding: 8px;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgb(14, 149, 205);
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow:1px 2px 5px rgb(14, 149, 205);
 }
 
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
+    table-layout: auto; /* Adjust table layout */
 }
 
 th, td {
@@ -64,7 +82,7 @@ th {
 input[type="text"],
 select,
 input[type="date"] {
-    width: calc(100% - 12px);
+    width: calc(100% - 22px);
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 4px;
@@ -79,34 +97,29 @@ select {
     padding-right: 30px;
 }
 
-button[type="submit"] {
+button[type="submit"],
+#saveButton,
+#submitLeaveHistory,
+.clear-button {
     background-color: rgb(14, 149, 205);
     color: white;
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+    margin: 10px auto;
     display: block;
-    margin: 0 auto;
-}
-
-button[type="submit"]:hover {
-    background-color: rgb(35, 149, 198);
-}
-
-.clear-button {
-    background-color: #f44336;
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-right: 10px;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
     transition: background-color 0.3s;
 }
 
+button[type="submit"]:hover,
+#saveButton:hover,
+#submitLeaveHistory:hover,
 .clear-button:hover {
-    background-color: #d32f2f;
+    background-color: rgb(188, 33, 33);
 }
 
 .submit-button-container {
@@ -115,7 +128,7 @@ button[type="submit"]:hover {
 }
 
 .submit-button-container button {
-    margin: 0 5px;
+    margin: 0 auto; /* Center the button */
     display: inline-block;
 }
 
@@ -125,8 +138,9 @@ button[type="submit"]:hover {
     box-shadow: 0 2px 5px rgb(14, 149, 205);
     overflow: hidden;
     margin: 10px auto;
-    width: 80%;
-    padding: 30px;
+    width: 100%;
+    max-width: 1000px;
+    padding: 15px;
     position: relative;
 }
 
@@ -134,77 +148,197 @@ button[type="submit"]:hover {
     text-align: center;
     margin: 10px 0 20px;
     color: rgb(14, 149, 205);
-    font-size: 30px;
-}
-
-#saveButton {
-    background-color: rgb(14, 148, 205);
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
-
-#saveButton:hover {
-    background-color: rgb(35, 149, 198);
-    
+    font-size: 24px;
 }
 
 #leaveTypeFilter {
-    position: top-right;
-    top: 0;
-    right: 0;
-    margin-top: 10px;
-    margin-right: 20px;
-}
-#submitLeaveHistory {
-    background-color: rgb(14, 149, 205);
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    margin: 10px auto; /* Center horizontally and add some margin */
-    display: block; /* Ensure it takes full width of its container */
-    width: 200px; /* Adjust width as per your design */
-    text-align: center; /* Center the text inside the button */
-    transition: background-color 0.3s;
+    position: absolute;
+    top: 10px;
+    right: 20px;
 }
 
-#submitLeaveHistory:hover {
-    background-color: rgb(35, 149, 198);
-}
-
- 
-/* Container to hold the filter by employee selector */
 .filter-submit-container {
     display: flex;
     justify-content: flex-end;
-    margin-bottom: 10px; /* Adjust the margin as needed */
-    font-size: 12px;
-    font-size: 16px; /* Adjust the font size as needed */
-    margin-right: 5px; /* Optional: space between label and select */
+    margin-bottom: 10px;
+    font-size: 16px;
 }
- 
-/* Style the select dropdown */
+
 #employeeSelector {
-    width: 150px; /* Adjust the width as needed */
+    width: 150px;
     padding: 5px;
-    font-size: 12px;
+    font-size: 16px;
 }
+
+/* Approval Status Styles */
+.approval-status {
+    display: inline-block;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-weight: bold;
+    color: white;
+    text-transform: capitalize;
+}
+
+.approval-status.pending {
+    background-color: #f0ad4e; /* Orange */
+}
+
+.approval-status.approved {
+    background-color: #5bc0de; /* Light Blue */
+}
+
+.approval-status.rejected {
+    background-color: #d9534f; /* Red */
+}
+
+/* Delete Button Styles */
 .delete-button {
-    background-color: #f44336;
+    background-color: rgb(219, 25, 25);
     color: white;
     padding: 12px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-right: 10px;
+    margin: 10px auto;
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    text-align: center;
     transition: background-color 0.3s;
 }
 
 .delete-button:hover {
-    background-color: #d32f2f;
+    background-color: rgb(188, 33, 33);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .header img {
+        width: 100%;
+        max-width: none;
+    }
+
+    .tab-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .tab button {
+        margin-right: 0;
+        margin-bottom: 10px;
+    }
+
+    #leaveForm {
+        width: 95%;
+        padding: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    #leaveForm input[type="text"],
+    #leaveForm select,
+    #leaveForm input[type="date"] {
+        width: calc(50% - 10px);
+        margin-bottom: 0;
+    }
+
+    #leaveForm button[type="submit"] {
+        width: auto;
+        margin-top: 10px;
+    }
+
+    #leaveHistory {
+        width: 95%;
+    }
+
+    #leaveHistoryHeading {
+        font-size: 20px;
+    }
+
+    #leaveTypeFilter {
+        position: static;
+        margin-top: 10px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 10px;
+    }
+
+    .header img {
+        width: 80%;
+    }
+
+    #leaveForm {
+        flex-direction: column;
+    }
+
+    #leaveForm input[type="text"],
+    #leaveForm select,
+    #leaveForm input[type="date"] {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    button[type="submit"],
+    #saveButton,
+    #submitLeaveHistory,
+    .clear-button,
+    .delete-button {
+        width: 100%;
+    }
+
+    .submit-button-container {
+        margin-top: 10px;
+    }
+
+    #leaveHistoryHeading {
+        font-size: 18px;
+    }
+}
+
+/* Responsive Table in 3x3 Matrix */
+@media (max-width: 600px) {
+    #leaveForm table,
+    #leaveHistory table {
+        display: block;
+        width: 100%;
+        table-layout: auto; /* Adjust table layout */
+    }
+
+    #leaveForm thead,
+    #leaveHistory thead {
+        display: none;
+    }
+
+    #leaveForm tbody,
+    #leaveHistory tbody {
+        display: block;
+    }
+
+    #leaveForm td,
+    #leaveHistory td {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        padding: 8px;
+        border: none;
+        border-bottom: 1px solid #ddd;
+        position: relative;
+        white-space: nowrap; /* Prevent text wrapping */
+        overflow: hidden; /* Hide overflow text */
+        text-overflow: ellipsis; /* Show ellipsis if text overflows */
+    }
+
+    #leaveForm td::before,
+    #leaveHistory td::before {
+        content: attr(data-label);
+        font-weight: bold;
+        display: block;
+        margin-bottom: 5px;
+    }
 }
